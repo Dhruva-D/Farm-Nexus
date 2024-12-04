@@ -1,0 +1,234 @@
+/* General Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f8ff;
+  color: #333;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+/* Navigation Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+}
+
+.navbar .logo {
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li {
+  margin-left: 20px;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.navbar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Cart Button Styling */
+.cart-button {
+  position: relative;
+  top: 10px;  /* Adjusted to be just below the navbar */
+  right: 20px;
+  z-index: 100;
+  margin-bottom: 20px;  /* Added margin to create space between the navbar and cart button */
+  text-align: right;
+}
+
+.cart-button button {
+  font-size: 1.2rem;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-button button:hover {
+  background-color: #45a049;
+}
+
+/* Equipment Section */
+.equipment-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.equipment-item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+}
+
+.equipment-item img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.equipment-item h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.equipment-item p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.equipment-item .button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.equipment-item .button:hover {
+  background-color: #45a049;
+}
+
+/* Cart Summary Styling */
+#cartSummary {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  display: none; /* Hidden by default */
+  z-index: 100;
+  transition: all 0.3s ease-in-out;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background-color: #f0f8ff;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.cart-item span {
+  font-size: 1rem;
+}
+
+.cart-item span:last-child {
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .navbar ul li {
+    margin-left: 10px;
+  }
+
+  .cart-button {
+    top: 20px;
+    right: 10px;
+  }
+
+  .cart-button button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+
+  /* Adjust the equipment container for smaller screens */
+  .equipment-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  #cartSummary {
+    width: 250px;
+    top: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .equipment-container {
+    grid-template-columns: 1fr;  /* Stack items vertically for very small screens */
+  }
+
+  .equipment-item {
+    margin-bottom: 15px;
+  }
+
+  #cartSummary {
+    width: 90%;
+    top: 50px;
+    right: 5%;
+  }
+
+  .cart-button button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+/* Styling for the Available Equipment for Rent heading */
+h2 {
+  font-size: 2rem; /* Bigger font size */
+  font-weight: bold; /* Bold text */
+  color: #4CAF50; /* Use a green color to match the theme */
+  text-transform: uppercase; /* Make text uppercase */
+  letter-spacing: 2px; /* Add some spacing between letters */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for effect */
+  margin: 10px 0; /* Reduce margin to minimize gap */
+  text-align: center; /* Center align the heading */
+}
+
+/* Remove unnecessary space above the navbar */
+header {
+  margin-bottom: -10px; /* Reduce margin to minimize space between navbar and heading */
+}
+
+

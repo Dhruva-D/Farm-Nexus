@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNexus - Crop Predictions</title>
+    <link rel="stylesheet" href="recom.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">FarmNexus</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="predictor.html">Predictor</a></li>
+                <li><a href="mart.html">Farm Mart</a></li>
+                <li><a href="recom.html">Crop Recommendations</a></li>
+                <li><a href="bot.html">AI Chatbot</a></li>
+            </ul>
+        </nav>
+        <h1>FarmNexus - Agricultural Platform</h1>
+    </header>
+
+    <main>
+        <section class="crop-prediction">
+            <h2>Climate & Soil Condition Input</h2>
+
+            <!-- Buttons for User Input -->
+            <div class="user-input">
+                <h3>Climate Condition</h3>
+                <div class="climate-buttons">
+                    <button class="button" onclick="selectClimate('tropical')">Tropical</button>
+                    <button class="button" onclick="selectClimate('arid')">Arid</button>
+                    <button class="button" onclick="selectClimate('temperate')">Temperate</button>
+                    <button class="button" onclick="selectClimate('continental')">Continental</button>
+                </div>
+
+                <h3>Soil Condition</h3>
+                <div class="soil-buttons">
+                    <button class="button" onclick="selectSoil('loamy')">Loamy Soil</button>
+                    <button class="button" onclick="selectSoil('sandy')">Sandy Soil</button>
+                    <button class="button" onclick="selectSoil('clay')">Clay Soil</button>
+                </div>
+            </div>
+
+            <!-- Recommend Crops Button -->
+            <button class="recommend-button" onclick="recommendCrop()">Recommend Crops</button>
+
+            <!-- Section for Showing Ideal Crop Suggestions -->
+            <div id="idealCropSection" class="crop-container"></div>
+
+            <!-- Crop Prediction Details Modal (hidden by default) -->
+            <div id="predictionModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                    <h2 id="cropName"></h2>
+                    <p id="cropPrediction"></p>
+                    <p id="bestConditions"></p>
+                    <p id="cropDescription"></p>
+                    <p id="cropBenefits"></p>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 FarmNexus. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

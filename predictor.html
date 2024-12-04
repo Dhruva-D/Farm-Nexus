@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNexus Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">FarmNexus</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="predictor.html">Predictor</a></li>
+                <li><a href="mart.html">Farm Mart</a></li>
+                <li><a href="recom.html">Crop Recommendations</a></li>
+                <li><a href="bot.html">AI Chatbot</a></li>
+            </ul>
+        </nav>  
+        <h1>FarmNexus Predictor</h1>
+    </header>
+
+    <!-- Predictor Sections -->
+    <main>
+        <div class="section-container">
+            <!-- Market Price Section -->
+            <section class="market-section">
+                <h2>Get Market Price</h2>
+                <label for="crop">Crop: </label>
+                <input type="text" id="crop" placeholder="Enter Crop Name">
+                <button class="button" onclick="getMarketPrice()">Get Price</button>
+                <div id="marketPriceResult" class="result"></div>
+            </section>
+    
+            <!-- Crop Demand Prediction Section -->
+            <section class="demand-section">
+                <h2>Predict Crop Demand</h2>
+                <label for="cropDemand">Crop: </label>
+                <input type="text" id="cropDemand" placeholder="Enter Crop Name">
+                <button class="button" onclick="getPredictiveDemand()">Predict Demand</button>
+                <div id="predictiveDemandResult" class="result"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+<footer class="footer">
+  <p>&copy; 2024 FarmNexus. All Rights Reserved.</p>
+</footer>
+
+    <script>
+        // Generate random values between 30 and 40 for market price
+        function getMarketPrice() {
+            const crop = document.getElementById('crop').value;
+            if (crop) {
+                const randomPrice = (Math.random() * (40 - 30) + 30).toFixed(2);
+                document.getElementById('marketPriceResult').innerText = `The current market price for ${crop} is ₹${randomPrice} per kg.`;
+            } else {
+                alert('Please enter a crop name.');
+            }
+        }
+
+        // Generate random values between 30 and 40 for crop demand
+        function getPredictiveDemand() {
+            const crop = document.getElementById('cropDemand').value;
+            if (crop) {
+                const randomDemand = (Math.random() * (40 - 30) + 30).toFixed(2);
+                document.getElementById('predictiveDemandResult').innerText = `The predicted demand for ${crop} is ${randomDemand} tons.`;
+            } else {
+                alert('Please enter a crop name.');
+            }
+        }
+    </script>
+
+</body>
+</html>
