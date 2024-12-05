@@ -18,6 +18,8 @@
                 <li><a href="recom.html">Crop Recommendations</a></li>
                 <li><a href="https://ayushmitra-bot.streamlit.app/" target="_blank" rel="noopener noreferrer">AI Chatbot</a></li>
             </ul>
+            <!-- Language Selector -->
+            <div id="google_translate_element" class="language-selector"></div>
         </nav>
         <h1>FarmNexus - Agricultural Platform</h1>
     </header>
@@ -30,5 +32,16 @@
     </footer>
 
     <script src="script.js"></script>
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
