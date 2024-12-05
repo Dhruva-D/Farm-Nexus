@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FarmNexus</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <h1>FarmNexus</h1>
+            <p>A Digital Platform for Streamlined Agricultural Marketing</p>
+        </div>
+    </header>
+
+    <!-- Signup Form Section -->
+    <section id="signup">
+        <h2>Sign Up for FarmNexus</h2>
+        <p>Join FarmNexus to connect with farmers, vendors, and equipment owners in a smarter, more efficient way.</p>
+        
+        <!-- Sign Up Form -->
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Create a password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="user_type">I am a:</label>
+                <select id="user_type" name="user_type">
+                    <option value="farmer">Farmer</option>
+                    <option value="vendor">Vendor</option>
+                    <option value="equipment_owner">Equipment Owner</option>
+                </select>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="login-link">
+            <p>Already have an account? <a href="login.html">Log In</a></p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 FarmNexus. All rights reserved.</p>
+    </footer>
+
+    <script src="signup.js"></script>
+</body>
+</html>
