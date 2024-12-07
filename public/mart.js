@@ -6,7 +6,7 @@ async function getUserName() {
     let userName = 'Guest'; // Default name
 
     // Simulate fetching the username, e.g., from a backend or session
-    await fetch('/user-info')
+    await fetch('https://farm-nexus-api.vercel.app/user-info')
         .then(response => response.json())
         .then(data => {
             userName = data.name;
