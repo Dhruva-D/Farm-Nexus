@@ -7,9 +7,9 @@ const cors = require('cors');
 
 const app = express();
 
-// Allow CORS for your frontend domain
+// Allow CORS for your frontend doindex
 app.use(cors({
-    origin: "https://farm-nexus-frontend.vercel.app/",  // Add your frontend domain
+    origin: "https://farm-nexus-frontend.vercel.app/",  // Add your frontend doindex
     methods: ["GET", "POST"],
     credentials: true,  // Allow credentials if needed
 }));
@@ -44,7 +44,7 @@ const User = mongoose.model('User', userSchema);
 // Middleware to check if the user is authenticated
 function isAuthenticated(req, res, next) {
     if (req.session.user) {
-        return next(); // Proceed to /main
+        return next(); // Proceed to /index
     } else {
         res.redirect('/?error=signin-first'); // Redirect to welcome page with error
     }
@@ -73,7 +73,7 @@ app.post('/signup', async (req, res) => {
         await newUser.save();
         console.log('User registered:', newUser);
         req.session.user = { name: newUser.name, id: newUser._id }; // Save user in session
-        res.redirect('/main');
+        res.redirect('/index');
     } catch (err) {
         console.error('Error saving user:', err);
         res.status(500).send('Error registering user.');
@@ -89,7 +89,7 @@ app.post('/signin', async (req, res) => {
         if (user) {
             console.log('User logged in:', user);
             req.session.user = { name: user.name, id: user._id }; // Save user in session
-            res.redirect('/main');
+            res.redirect('/index');
         } else {
             res.redirect('/?error=signup-first'); // Redirect to welcome page with error
         }
@@ -99,10 +99,10 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-// Main Page (Only for Signed-In Users)
-app.get('/main', isAuthenticated, (req, res) => {
+// index Page (Only for Signed-In Users)
+app.get('/index', isAuthenticated, (req, res) => {
     const userName = req.session.user.name; // Get the logged-in user's name
-    res.sendFile(path.join(__dirname, 'server', 'public', 'main.html'));  // Adjusted path to main.html
+    res.sendFile(path.join(__dirname, 'server', 'public', 'index.html'));  // Adjusted path to index.html
 });
 
 // Route to get logged-in user's information
