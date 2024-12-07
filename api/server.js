@@ -9,31 +9,31 @@ const app = express();
 
 // Allow CORS for your frontend
 app.use(cors({
-    origin: "https://farm-nexus-frontend.vercel.app/",  // Add your frontend URL
+    origin: "https://farm-nexus-frontend.vercel.app",  // Your frontend URL
     methods: ["GET", "POST"],
     credentials: true,  // Allow credentials if needed
 }));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '..', 'public')));  // Adjusted path to public folder
+app.use(express.static(path.join(__dirname, '..', 'public')));  // Static files in the 'public' folder
 
 // Configure session
 app.use(session({
-    secret: 'farmnexus_secret',
+    secret: process.env.SESSION_SECRET || 'farmnexus_secret',
     resave: false,
     saveUninitialized: false,
 }));
 
-// Connect to MongoDB
+// Connect to MongoDB using the environment variable for MONGO_URI
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
 })
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
-// Define Mongoose Schema
+// Define Mongoose Schema for user
 const userSchema = new mongoose.Schema({
     name: String,
     state: String,
@@ -57,7 +57,7 @@ function isAuthenticated(req, res, next) {
 
 // Welcome Page (includes Sign Up and Sign In forms)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'welcome.html'));  // Adjusted path to welcome.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'welcome.html'));  // Serve welcome page
 });
 
 // Handle Sign-Up
@@ -105,7 +105,7 @@ app.post('/signin', async (req, res) => {
 // index Page (Only for Signed-In Users)
 app.get('/index', isAuthenticated, (req, res) => {
     const userName = req.session.user.name; // Get the logged-in user's name
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));  // Adjusted path to index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));  // Serve index page
 });
 
 // Route to get logged-in user's information
