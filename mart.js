@@ -8,17 +8,30 @@ function addToCart(item, price) {
 }
 
 // Function to view the cart and list the items
-function viewCart() {
+// Function to view the cart and list the items
+async function viewCart() {
     const cartSummary = document.getElementById('cartSummary');
-    cartSummary.style.display = 'block';  // Show the cart summary when button is pressed
+    cartSummary.style.display = 'block'; // Show the cart summary
     cartSummary.innerHTML = ''; // Clear previous cart summary
-    
+
+    // Fetch logged-in user's name
+    let userName = 'Guest';
+    try {
+        const response = await fetch('/user-info');
+        if (response.ok) {
+            const data = await response.json();
+            userName = data.name || 'Guest';
+        }
+    } catch (error) {
+        console.error('Error fetching user info:', error);
+    }
+
     if (cart.length === 0) {
-        cartSummary.innerHTML = '<h3>Your cart is empty.</h3>';
+        cartSummary.innerHTML = `<h3>Your cart is empty, ${userName}.</h3>`;
     } else {
-        let cartHTML = '<h3>Cart Summary</h3>';
+        let cartHTML = `<h3>${userName}'s Cart Summary</h3>`;
         let total = 0;
-        cart.forEach((cartItem, index) => {
+        cart.forEach(cartItem => {
             cartHTML += `
                 <div class="cart-item">
                     <span>${cartItem.item}</span>
@@ -28,20 +41,21 @@ function viewCart() {
             total += cartItem.price;
         });
 
-        // Calculate GST (18%)
+        // Calculate GST (18%) and Platform Fee (3%)
         let gst = total * 0.18;
-        let totalWithGST = total + gst;
+        let platformFee = total * 0.03;
+        let totalWithFees = total + gst + platformFee;
 
         cartHTML += `<hr>`;
         cartHTML += `<p><strong>Subtotal: ₹${total}</strong></p>`;
         cartHTML += `<p><strong>GST (18%): ₹${gst.toFixed(2)}</strong></p>`;
-        cartHTML += `<p><strong>Total: ₹${totalWithGST.toFixed(2)}</strong></p>`;
-
-        // Add Checkout button
+        cartHTML += `<p><strong>Platform Fee (3%): ₹${platformFee.toFixed(2)}</strong></p>`;
+        cartHTML += `<p><strong>Total: ₹${totalWithFees.toFixed(2)}</strong></p>`;
         cartHTML += `<button class="button" onclick="checkout()">Checkout</button>`;
         cartSummary.innerHTML = cartHTML;
     }
 }
+
 
 // Checkout function
 function checkout() {
