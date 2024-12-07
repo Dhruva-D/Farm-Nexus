@@ -9,7 +9,7 @@ const app = express();
 
 // Allow CORS for your frontend domain
 app.use(cors({
-    origin: "https://farm-nexus18.vercel.app/",  // Add your frontend domain
+    origin: "https://farm-nexus-frontend.vercel.app/",  // Add your frontend domain
     methods: ["GET", "POST"],
     credentials: true,  // Allow credentials if needed
 }));
