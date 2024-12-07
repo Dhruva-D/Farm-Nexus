@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNexus</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="logo">FarmNexus</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="predictor.html">Predictor</a></li>
+                <li><a href="mart.html">Farm Mart</a></li>
+                <li><a href="recom.html">Crop Recommendations</a></li>
+                <li><a href="https://ayushmitra-bot.streamlit.app/" target="_blank" rel="noopener noreferrer">AI Chatbot</a></li>
+            </ul>
+            <!-- Language Selector -->
+            <div id="google_translate_element" class="language-selector"></div>
+        </nav>
+        <h1>FarmNexus - Agricultural Platform</h1>
+    </header>
+
+    <!-- Image Slideshow -->
+    <section class="slideshow-container">
+        <div class="slides fade">
+            <img src="https://dailynexus.s3.us-west-1.amazonaws.com/dailynexus/wp-content/uploads/2021/06/12122826/climatefood_2400x900.png" alt="Farm Image 2">
+        </div>
+        <div class="slides fade">
+            <img src="https://i.postimg.cc/Xvdfzd6v/capture-20241204195045415.png" alt="Farm Image 1">
+        </div>
+        <div class="slides fade">
+            <img src="https://i0.wp.com/idconsortium.com/wp-content/uploads/2024/02/IDConsortium-PRIMA-Calls_sustainability-mediterranean-irrigated-agriculture-wefe-nexus-approach-bg.jpg" alt="Farm Image 3">
+        </div>
+        <!-- Slideshow Navigation -->
+        <a class="prev" onclick="changeSlide(-1)">❮</a>
+        <a class="next" onclick="changeSlide(1)">❯</a>
+    </section>
+
+    <!-- FarmNexus Introduction -->
+    <section class="introduction">
+        <h2>Welcome to FarmNexus</h2>
+        <p>
+            FarmNexus is your all-in-one agricultural platform designed to empower farmers with real-time market information, predictive analytics, equipment rentals, crop recommendations, and AI-driven support. Explore our key features:
+        </p>
+        <ul>
+            <li><strong>Market Prices:</strong> Get updated market prices for various crops.</li>
+            <li><strong>Predictive Demand:</strong> Plan better with demand forecasts.</li>
+            <li><strong>Equipment Rental:</strong> Access affordable farming equipment.</li>
+            <li><strong>Crop Recommendations:</strong> Choose the best crops based on climate and soil.</li>
+            <li><strong>AI Chatbot:</strong> Get instant answers to your farming queries.</li>
+        </ul>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 FarmNexus. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Slideshow Script -->
+    <script src="script.js"></script>
+</body>
+</html>

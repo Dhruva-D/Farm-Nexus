@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to FarmNexus</title>
+    <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to FarmNexus</h1>
+        <div id="error-message" class="error"></div>
+
+        <div class="tabs">
+            <button id="signup-tab" class="active">Sign Up</button>
+            <button id="signin-tab">Sign In</button>
+        </div>
+
+        <!-- Sign Up Form -->
+        <form id="signup-form" class="form active" action="/signup" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
+
+            <label for="district">District:</label>
+            <input type="text" id="district" name="district" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+            </select>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <!-- Sign In Form -->
+        <form id="signin-form" class="form" action="/signin" method="POST">
+            <label for="signin-name">Name:</label>
+            <input type="text" id="signin-name" name="name" required>
+
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+
+    <script>
+        // Tab functionality for toggling forms
+        document.getElementById('signup-tab').addEventListener('click', () => {
+            document.getElementById('signup-form').classList.add('active');
+            document.getElementById('signin-form').classList.remove('active');
+            document.getElementById('signup-tab').classList.add('active');
+            document.getElementById('signin-tab').classList.remove('active');
+        });
+
+        document.getElementById('signin-tab').addEventListener('click', () => {
+            document.getElementById('signin-form').classList.add('active');
+            document.getElementById('signup-form').classList.remove('active');
+            document.getElementById('signin-tab').classList.add('active');
+            document.getElementById('signup-tab').classList.remove('active');
+        });
+
+        // Error message handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const error = params.get('error');
+            const errorMessageDiv = document.getElementById('error-message');
+
+            if (error === 'signin-first') {
+                errorMessageDiv.textContent = 'Please sign in first to access the platform.';
+            } else if (error === 'signup-first') {
+                errorMessageDiv.textContent = 'No account found. Please sign up first.';
+            }
+        });
+    </script>
+</body>
+</html>
