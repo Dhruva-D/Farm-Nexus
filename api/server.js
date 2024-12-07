@@ -7,16 +7,16 @@ const cors = require('cors');
 
 const app = express();
 
-// Allow CORS for your frontend doindex
+// Allow CORS for your frontend
 app.use(cors({
-    origin: "https://farm-nexus-frontend.vercel.app/",  // Add your frontend doindex
+    origin: "https://farm-nexus-frontend.vercel.app/",  // Add your frontend URL
     methods: ["GET", "POST"],
     credentials: true,  // Allow credentials if needed
 }));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'server', 'public')));  // Adjusted path to public folder
+app.use(express.static(path.join(__dirname, '..', 'public')));  // Adjusted path to public folder
 
 // Configure session
 app.use(session({
@@ -26,7 +26,10 @@ app.use(session({
 }));
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://dhruva20052706:NNFQgBubEBmMiqwk@cluster0.43s6x.mongodb.net/farmnexus?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
@@ -54,7 +57,7 @@ function isAuthenticated(req, res, next) {
 
 // Welcome Page (includes Sign Up and Sign In forms)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'server', 'public', 'welcome.html'));  // Adjusted path to welcome.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'welcome.html'));  // Adjusted path to welcome.html
 });
 
 // Handle Sign-Up
@@ -102,7 +105,7 @@ app.post('/signin', async (req, res) => {
 // index Page (Only for Signed-In Users)
 app.get('/index', isAuthenticated, (req, res) => {
     const userName = req.session.user.name; // Get the logged-in user's name
-    res.sendFile(path.join(__dirname, 'server', 'public', 'index.html'));  // Adjusted path to index.html
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));  // Adjusted path to index.html
 });
 
 // Route to get logged-in user's information
@@ -110,7 +113,5 @@ app.get('/user-info', isAuthenticated, (req, res) => {
     res.json({ name: req.session.user.name });
 });
 
-// Start the Server
-app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
-});
+// Export the Express app for Vercel
+module.exports = app;
