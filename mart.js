@@ -8,28 +8,15 @@ function addToCart(item, price) {
 }
 
 // Function to view the cart and list the items
-// Function to view the cart and list the items
-async function viewCart() {
+function viewCart() {
     const cartSummary = document.getElementById('cartSummary');
     cartSummary.style.display = 'block'; // Show the cart summary
     cartSummary.innerHTML = ''; // Clear previous cart summary
-
-    // Fetch logged-in user's name
-    let userName = 'Guest';
-    try {
-        const response = await fetch('/user-info');
-        if (response.ok) {
-            const data = await response.json();
-            userName = data.name || 'Guest';
-        }
-    } catch (error) {
-        console.error('Error fetching user info:', error);
-    }
-
+    
     if (cart.length === 0) {
-        cartSummary.innerHTML = `<h3>Your cart is empty, ${userName}.</h3>`;
+        cartSummary.innerHTML = '<h3>Your cart is empty.</h3>';
     } else {
-        let cartHTML = `<h3>${userName}'s Cart Summary</h3>`;
+        let cartHTML = '<h3>Cart Summary</h3>';
         let total = 0;
         cart.forEach(cartItem => {
             cartHTML += `
@@ -55,7 +42,6 @@ async function viewCart() {
         cartSummary.innerHTML = cartHTML;
     }
 }
-
 
 // Checkout function
 function checkout() {
