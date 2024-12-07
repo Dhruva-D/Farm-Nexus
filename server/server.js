@@ -9,14 +9,14 @@ const app = express();
 
 // Allow CORS for your frontend domain
 app.use(cors({
-    origin: "https://shortify-url-three.vercel.app",  // Add your frontend domain
+    origin: "https://farm-nexus18.vercel.app/",  // Add your frontend domain
     methods: ["GET", "POST"],
     credentials: true,  // Allow credentials if needed
-  }));
+}));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'server', 'public')));  // Adjusted path to public folder
 
 // Configure session
 app.use(session({
@@ -26,7 +26,7 @@ app.use(session({
 }));
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/farmNexusDB')
+mongoose.connect('mongodb+srv://dhruva20052706:NNFQgBubEBmMiqwk@cluster0.43s6x.mongodb.net/farmnexus?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
@@ -54,7 +54,7 @@ function isAuthenticated(req, res, next) {
 
 // Welcome Page (includes Sign Up and Sign In forms)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
+    res.sendFile(path.join(__dirname, 'server', 'public', 'welcome.html'));  // Adjusted path to welcome.html
 });
 
 // Handle Sign-Up
@@ -102,15 +102,13 @@ app.post('/signin', async (req, res) => {
 // Main Page (Only for Signed-In Users)
 app.get('/main', isAuthenticated, (req, res) => {
     const userName = req.session.user.name; // Get the logged-in user's name
-    res.sendFile(path.join(__dirname, 'public', 'main.html'));
+    res.sendFile(path.join(__dirname, 'server', 'public', 'main.html'));  // Adjusted path to main.html
 });
-
 
 // Route to get logged-in user's information
 app.get('/user-info', isAuthenticated, (req, res) => {
     res.json({ name: req.session.user.name });
 });
-
 
 // Start the Server
 app.listen(3000, () => {
