@@ -7,33 +7,30 @@ const cors = require('cors');
 
 const app = express();
 
-// Allow CORS for your frontend
+// Allow CORS for your frontend domain
 app.use(cors({
-    origin: "https://farm-nexus-frontend.vercel.app",  // Your frontend URL
+    origin: "https://shortify-url-three.vercel.app",  // Add your frontend domain
     methods: ["GET", "POST"],
     credentials: true,  // Allow credentials if needed
-}));
+  }));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '..', 'public')));  // Static files in the 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Configure session
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'farmnexus_secret',
+    secret: 'farmnexus_secret',
     resave: false,
     saveUninitialized: false,
 }));
 
-// Connect to MongoDB using the environment variable for MONGO_URI
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+// Connect to MongoDB
+mongoose.connect('mongodb+srv://dhruva20052706:NNFQgBubEBmMiqwk@cluster0.43s6x.mongodb.net/farmnexus?retryWrites=true&w=majority&appName=Cluster0')
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
-// Define Mongoose Schema for user
+// Define Mongoose Schema
 const userSchema = new mongoose.Schema({
     name: String,
     state: String,
@@ -47,7 +44,7 @@ const User = mongoose.model('User', userSchema);
 // Middleware to check if the user is authenticated
 function isAuthenticated(req, res, next) {
     if (req.session.user) {
-        return next(); // Proceed to /index
+        return next(); // Proceed to /main
     } else {
         res.redirect('/?error=signin-first'); // Redirect to welcome page with error
     }
@@ -57,7 +54,7 @@ function isAuthenticated(req, res, next) {
 
 // Welcome Page (includes Sign Up and Sign In forms)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'welcome.html'));  // Serve welcome page
+    res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
 });
 
 // Handle Sign-Up
@@ -76,7 +73,7 @@ app.post('/signup', async (req, res) => {
         await newUser.save();
         console.log('User registered:', newUser);
         req.session.user = { name: newUser.name, id: newUser._id }; // Save user in session
-        res.redirect('/index');
+        res.redirect('/main');
     } catch (err) {
         console.error('Error saving user:', err);
         res.status(500).send('Error registering user.');
@@ -92,7 +89,7 @@ app.post('/signin', async (req, res) => {
         if (user) {
             console.log('User logged in:', user);
             req.session.user = { name: user.name, id: user._id }; // Save user in session
-            res.redirect('/index');
+            res.redirect('/main');
         } else {
             res.redirect('/?error=signup-first'); // Redirect to welcome page with error
         }
@@ -102,16 +99,20 @@ app.post('/signin', async (req, res) => {
     }
 });
 
-// index Page (Only for Signed-In Users)
-app.get('/index', isAuthenticated, (req, res) => {
+// Main Page (Only for Signed-In Users)
+app.get('/main', isAuthenticated, (req, res) => {
     const userName = req.session.user.name; // Get the logged-in user's name
-    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));  // Serve index page
+    res.sendFile(path.join(__dirname, 'public', 'main.html'));
 });
+
 
 // Route to get logged-in user's information
 app.get('/user-info', isAuthenticated, (req, res) => {
     res.json({ name: req.session.user.name });
 });
 
-// Export the Express app for Vercel
-module.exports = app;
+
+// Start the Server
+app.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
+});

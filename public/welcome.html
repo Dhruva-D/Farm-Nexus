@@ -3,76 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FarmNexus</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Welcome to FarmNexus</title>
+    <link rel="stylesheet" href="welcome.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <header>
-        <nav class="navbar">
-            <a href="index.html" class="logo">FarmNexus</a>
-            <ul>
-                <li><a href="welcome.html">Home</a></li>
-                <li><a href="predictor.html">Predictor</a></li>
-                <li><a href="mart.html">Farm Mart</a></li>
-                <li><a href="recom.html">Crop Recommendations</a></li>
-                <li><a href="https://farmnexus-bot.streamlit.app/" target="_blank" rel="noopener noreferrer">AI Chatbot</a></li>
-            </ul>
-            <!-- Language Selector -->
-            <div id="google_translate_element" class="language-selector"></div>
-        </nav>
-        <h1>FarmNexus - Agricultural Platform</h1>
-    </header>
+    <div class="container">
+        <h1>Welcome to FarmNexus</h1>
+        <div id="error-message" class="error"></div>
 
-    <!-- Image Slideshow -->
-    <section class="slideshow-container">
-        <div class="slides fade">
-            <img src="https://dailynexus.s3.us-west-1.amazonaws.com/dailynexus/wp-content/uploads/2021/06/12122826/climatefood_2400x900.png" alt="Farm Image 2">
+        <div class="tabs">
+            <button id="signup-tab" class="active">Sign Up</button>
+            <button id="signin-tab">Sign In</button>
         </div>
-        <div class="slides fade">
-            <img src="https://i.postimg.cc/Xvdfzd6v/capture-20241204195045415.png" alt="Farm Image 1">
-        </div>
-        <div class="slides fade">
-            <img src="https://i0.wp.com/idconsortium.com/wp-content/uploads/2024/02/IDConsortium-PRIMA-Calls_sustainability-mediterranean-irrigated-agriculture-wefe-nexus-approach-bg.jpg" alt="Farm Image 3">
-        </div>
-        <!-- Slideshow Navigation -->
-        <a class="prev" onclick="changeSlide(-1)">❮</a>
-        <a class="next" onclick="changeSlide(1)">❯</a>
-    </section>
 
-    <!-- FarmNexus Introduction -->
-    <section class="introduction">
-        <h2>Welcome to FarmNexus</h2>
-        <p>
-            FarmNexus is your all-in-one agricultural platform designed to empower farmers with real-time market information, predictive analytics, equipment rentals, crop recommendations, and AI-driven support. Explore our key features:
-        </p>
-        <ul>
-            <li><strong>Market Prices:</strong> Get updated market prices for various crops.</li>
-            <li><strong>Predictive Demand:</strong> Plan better with demand forecasts.</li>
-            <li><strong>Equipment Rental:</strong> Access affordable farming equipment.</li>
-            <li><strong>Crop Recommendations:</strong> Choose the best crops based on climate and soil.</li>
-            <li><strong>AI Chatbot:</strong> Get instant answers to your farming queries.</li>
-        </ul>
-    </section>
+        <!-- Sign Up Form -->
+        <form id="signup-form" class="form active" action="/signup" method="POST">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2024 FarmNexus. All Rights Reserved.</p>
-    </footer>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required>
 
-    <!-- Google Translate Script -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-                {pageLanguage: 'en'},
-                'google_translate_element'
-            );
+            <label for="district">District:</label>
+            <input type="text" id="district" name="district" required>
 
-        }
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="role">Role:</label>
+            <select id="role" name="role" required>
+                <option value="buyer">Buyer</option>
+                <option value="seller">Seller</option>
+            </select>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <!-- Sign In Form -->
+        <form id="signin-form" class="form" action="/signin" method="POST">
+            <label for="signin-name">Name:</label>
+            <input type="text" id="signin-name" name="name" required>
+
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+
+    <script>
+        // Tab functionality for toggling forms
+        document.getElementById('signup-tab').addEventListener('click', () => {
+            document.getElementById('signup-form').classList.add('active');
+            document.getElementById('signin-form').classList.remove('active');
+            document.getElementById('signup-tab').classList.add('active');
+            document.getElementById('signin-tab').classList.remove('active');
+        });
+
+        document.getElementById('signin-tab').addEventListener('click', () => {
+            document.getElementById('signin-form').classList.add('active');
+            document.getElementById('signup-form').classList.remove('active');
+            document.getElementById('signin-tab').classList.add('active');
+            document.getElementById('signup-tab').classList.remove('active');
+        });
+
+        // Error message handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const error = params.get('error');
+            const errorMessageDiv = document.getElementById('error-message');
+
+            if (error === 'signin-first') {
+                errorMessageDiv.textContent = 'Please sign in first to access the platform.';
+            } else if (error === 'signup-first') {
+                errorMessageDiv.textContent = 'No account found. Please sign up first.';
+            }
+        });
     </script>
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <!-- Slideshow Script -->
-    <script src="script.js"></script>
 </body>
 </html>
