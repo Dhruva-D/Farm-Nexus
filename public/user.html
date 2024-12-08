@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmNexus - User Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar">
+        <a href="index.html" class="logo">FarmNexus</a>
+        <ul>
+            <li><a href="main.html">Home</a></li>
+            <li><a href="predictor.html">Predictor</a></li>
+            <li><a href="mart.html">Farm Mart</a></li>
+            <li><a href="recom.html">Crop Recommendations</a></li>
+            <li><a href="user.html" class="active">Farm Family</a></li>
+            <li><a href="https://farmnexus-bot.streamlit.app/" target="_blank" rel="noopener noreferrer">AI Chatbot</a></li>
+        </ul>
+        <!-- Language Selector -->
+        <div id="google_translate_element" class="language-selector"></div>
+    </nav>
+        <h1>FarmNexus - User Dashboard</h1>
+    </header>
+
+    <!-- User Dashboard -->
+    <section class="user-dashboard">
+        <h2>Welcome, User!</h2>
+        <p>
+            Your personalized dashboard for all things farming. Here, you can manage your farm's resources, access real-time data, and make informed decisions for better farming outcomes.
+        </p>
+
+        <!-- User Information Display -->
+        <div id="user-info">
+            <!-- User details will be displayed here dynamically -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 FarmNexus. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Fetch user data and display it -->
+    <script>
+        // Function to fetch and display user details
+        async function fetchUserInfo() {
+            try {
+                const response = await fetch('/user-info');
+                const data = await response.json();
+
+                // Populate the user details in the user-info section
+                const userInfoDiv = document.getElementById('user-info');
+                userInfoDiv.innerHTML = `
+                    <h3>Name: ${data.name}</h3>
+                    <p><strong>State:</strong> ${data.state}</p>
+                    <p><strong>District:</strong> ${data.district}</p>
+                    <p><strong>Age:</strong> ${data.age}</p>
+                    <p><strong>Role:</strong> ${data.role}</p>
+                `;
+            } catch (err) {
+                console.error('Error fetching user info:', err);
+                document.getElementById('user-info').innerHTML = '<p>Error fetching user information.</p>';
+            }
+        }
+
+        // Fetch and display user info when the page loads
+        window.onload = fetchUserInfo;
+    </script>
+
+    <!-- Slideshow Script -->
+    <script src="script.js"></script>
+</body>
+</html>

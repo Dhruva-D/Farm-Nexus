@@ -9,6 +9,63 @@ body {
   flex-direction: column;
   min-height: 100vh; /* Ensures body takes at least full height */
 }
+/* Styling for the search bar */
+.search-bar {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 80%;
+  max-width: 500px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #0a8f08;
+  box-shadow: 2px 2px 8px rgba(10, 143, 8, 0.3);
+  outline: none;
+}
+
+/* "No results" message styling */
+.no-results-message {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff0000;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsive equipment item display */
+.equipment-item {
+  display: inline-block;
+  width: calc(50% - 10px);
+  margin: 5px;
+  text-align: center;
+}
+
+.equipment-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure proper responsiveness */
+@media (max-width: 600px) {
+  .equipment-item {
+      width: 100%;
+  }
+
+  .search-bar input {
+      width: 95%;
+  }
+}
 
 
 
@@ -232,4 +289,109 @@ header {
 
 .button {
   border: 1px solid greenyellow;
+}
+
+/* Styling for the search bar */
+.search-bar {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-bar input {
+  width: 80%;
+  max-width: 500px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.search-bar input:focus {
+  border-color: #0a8f08;
+  box-shadow: 2px 2px 8px rgba(10, 143, 8, 0.3);
+  outline: none;
+}
+
+/* "No results" message styling */
+.no-results-message {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff0000;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Equipment container styling */
+.equipment-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px; /* Add space between items */
+  justify-content: center; /* Align items horizontally in the center */
+}
+
+/* Equipment item styling */
+.equipment-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.equipment-item img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.equipment-item h4 {
+  font-size: 18px;
+  margin: 10px 0;
+  color: #333;
+}
+
+.equipment-item p {
+  font-size: 16px;
+  color: #666;
+  margin: 5px 0;
+}
+
+.equipment-item .button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #0a8f08;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.equipment-item .button:hover {
+  background-color: #086a06;
+}
+
+/* Add hover effect to equipment items */
+.equipment-item:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .equipment-item {
+      width: 90%; /* Take up more space on smaller screens */
+  }
+
+  .search-bar input {
+      width: 95%; /* Adjust input width for smaller screens */
+  }
 }

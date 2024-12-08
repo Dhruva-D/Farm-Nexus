@@ -69,3 +69,23 @@ function checkout() {
     cart = []; // Clear the cart after checkout
     setTimeout(() => cartSummary.style.display = 'none', 3000); // Hide the cart summary after 3 seconds
 }
+function searchProducts() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase();
+    const equipmentItems = document.querySelectorAll('.equipment-item');
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    let hasResults = false;
+
+    // Loop through equipment items and check for matches
+    equipmentItems.forEach(item => {
+        const itemName = item.querySelector('h4').textContent.toLowerCase();
+        if (itemName.includes(searchInput)) {
+            item.style.display = 'block'; // Show matching items
+            hasResults = true;
+        } else {
+            item.style.display = 'none'; // Hide non-matching items
+        }
+    });
+
+    // Show or hide the "No results" message based on matches
+    noResultsMessage.style.display = hasResults ? 'none' : 'block';
+}
