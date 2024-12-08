@@ -46,15 +46,15 @@ function isAuthenticated(req, res, next) {
     if (req.session.user) {
         return next(); // Proceed to /main
     } else {
-        res.redirect('/?error=signin-first'); // Redirect to welcome page with error
+        res.redirect('/?error=signin-first'); // Redirect to index page with error
     }
 }
 
 // Routes
 
-// Welcome Page (includes Sign Up and Sign In forms)
+// index Page (includes Sign Up and Sign In forms)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Handle Sign-Up
@@ -91,7 +91,7 @@ app.post('/signin', async (req, res) => {
             req.session.user = { name: user.name, id: user._id }; // Save user in session
             res.redirect('/main');
         } else {
-            res.redirect('/?error=signup-first'); // Redirect to welcome page with error
+            res.redirect('/?error=signup-first'); // Redirect to index page with error
         }
     } catch (err) {
         console.error('Error during sign-in:', err);
